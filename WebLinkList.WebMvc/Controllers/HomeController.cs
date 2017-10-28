@@ -8,6 +8,7 @@ using WebLinkList.WebMvc.Models;
 using WebLinkList.EF;
 using WebLinkList.Common;
 using Microsoft.Extensions.Options;
+using WebLinkList.EF.Model;
 
 namespace WebLinkList.WebMvc.Controllers
 {
@@ -84,6 +85,23 @@ namespace WebLinkList.WebMvc.Controllers
                 .Select(c => new CategoryViewModel {CategoryId = c.Id, Name = c.Name, CurrentCount = c.WebLinkCategories.Count() }).OrderByDescending(c => c.CurrentCount)
                 .ToList();
             return View(homeVm);
+        }
+
+        public IActionResult Redirect(Guid id) {
+
+            var webLink = _context.WebLinks.FirstOrDefault(wl => wl.Id == id);
+
+            if (webLink == null || string.IsNullOrEmpty(webLink.Url)) {
+                return View("Index");
+            }
+
+            //record the usage
+            var usage = new Usage { Id = Guid.NewGuid(), CreatedDateTime = DateTime.Now, WebLinkId = id};
+            _context.Usages.Add(usage);
+            _context.SaveChanges();
+            
+            //redirect
+            return Redirect(webLink.Url);
         }
 
         public IActionResult About()

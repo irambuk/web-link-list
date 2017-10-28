@@ -1,0 +1,27 @@
+﻿
+<section>
+    <div class="panel panel-info">
+        <div class="panel-heading">@ViewData["Title"]</div>
+        <!--
+        <div class="panel-body">            
+        </div>
+            -->
+        <ul class="list-group">
+            @foreach (var item in Model)
+            {
+                <li class="list-group-item">
+                    <a href="@Url.Action("Redirect","Home", new { Id = @item.WebLinkId})" target="_blank">
+                        <span>@item.Name - </span>
+                        <span class="badge">@item.CurrentCount</span>                        
+                    </a>
+                    @foreach (var category in item.Categories)
+                    {
+                        <a target="_blank" href="#"><span class="badge info">@category.Name</span></a>
+                    }
+                    <span class="small">Last visited: @item.LastVisitedDateTimeString</span>
+                </li>
+            }
+        </ul>
+
+    </div>
+</section>

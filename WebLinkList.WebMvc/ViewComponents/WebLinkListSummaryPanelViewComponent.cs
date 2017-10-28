@@ -7,8 +7,8 @@ using WebLinkList.WebMvc.Models;
 
 namespace WebLinkList.WebMvc.ViewComponents
 {
-    [ViewComponent(Name = "WebLinkListPanel")]
-    public class WebLinkListPanelViewComponent : ViewComponent
+    [ViewComponent(Name = "WebLinkListSummaryPanel")]
+    public class WebLinkListSummaryPanelViewComponent : ViewComponent
     {
         public async Task<IViewComponentResult> InvokeAsync(string title, List<WebLinkViewModel> webLinks)
         {

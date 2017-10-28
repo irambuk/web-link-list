@@ -10,7 +10,7 @@
             @foreach (var item in Model)
             {
                 <li class="list-group-item">
-                    <a target="_blank" href="@item.Url">
+                    <a href="@Url.Action("Redirect","Home", new { Id = @item.WebLinkId})" target="_blank">
                         <span>@item.Name - </span>
                         <span class="badge">@item.CurrentCount</span>                        
                     </a>
