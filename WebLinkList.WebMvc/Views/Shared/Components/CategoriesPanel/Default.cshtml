@@ -1,0 +1,18 @@
+﻿@model IEnumerable<WebLinkList.WebMvc.Models.CategoryViewModel>
+
+<section>
+    <div class="panel panel-primary">
+        <div class="panel-heading">@ViewData["Title"]</div>
+        <!--
+        <div class="panel-body">            
+        </div>
+            -->
+        <ul class="list-group">
+            @foreach (var item in Model)
+            {
+                <li class="list-group-item"><a target="_blank" href="#"><span>@item.Name - </span><span class="badge">@item.CurrentCount</span></a></li>
+            }
+        </ul>
+
+    </div>
+</section>

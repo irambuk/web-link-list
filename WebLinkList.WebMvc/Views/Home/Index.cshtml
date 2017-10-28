@@ -1,0 +1,40 @@
+﻿
+@model  WebLinkList.WebMvc.Models.HomeViewModel
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="row">
+            @await Component.InvokeAsync("ButtonPanel", new { title = "Add New ..."})
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                @await Component.InvokeAsync("WebLinkListPanel", new { title = "Favourite Links", webLinks = Model.FaviouriteWebLinks })
+            </div>
+            <div class="col-md-6">
+                @await Component.InvokeAsync("WebLinkListPanel", new { title = "Mostly Visted Links", webLinks = Model.TopWebLinks })
+            </div>
+        </div> 
+        <div class="row">
+            <div class="col-md-6">
+                @await Component.InvokeAsync("WebLinkListPanel", new { title = "Most Recently Visited Links", webLinks = Model.MostRecentlyViewedLinks })
+            </div>
+            <div class="col-md-6">
+                @await Component.InvokeAsync("WebLinkListPanel", new { title = "Least Recently Visited Links", webLinks = Model.LeastRecentlyViewedLinks })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                @await Component.InvokeAsync("WebLinkListPanel", new { title = "All Links", webLinks = Model.FaviouriteWebLinks })
+            </div>
+        </div>
+        
+    </div>
+    <div class="col-md-3">
+        @await Component.InvokeAsync("CategoriesPanel", new { title = "Categories", categories = Model.Categories })      
+    </div>
+</div>

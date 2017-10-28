@@ -1,0 +1,15 @@
+C:\RND\web-link-list\WebLinkList.WebMvc\bin\Debug\netcoreapp2.0\WebLinkList.WebMvc.deps.json
+C:\RND\web-link-list\WebLinkList.WebMvc\bin\Debug\netcoreapp2.0\WebLinkList.WebMvc.runtimeconfig.json
+C:\RND\web-link-list\WebLinkList.WebMvc\bin\Debug\netcoreapp2.0\WebLinkList.WebMvc.runtimeconfig.dev.json
+C:\RND\web-link-list\WebLinkList.WebMvc\bin\Debug\netcoreapp2.0\WebLinkList.WebMvc.dll
+C:\RND\web-link-list\WebLinkList.WebMvc\bin\Debug\netcoreapp2.0\WebLinkList.WebMvc.pdb
+C:\RND\web-link-list\WebLinkList.WebMvc\bin\Debug\netcoreapp2.0\WebLinkList.EF.dll
+C:\RND\web-link-list\WebLinkList.WebMvc\bin\Debug\netcoreapp2.0\WebLinkList.EF.pdb
+C:\RND\web-link-list\WebLinkList.WebMvc\obj\Debug\netcoreapp2.0\WebLinkList.WebMvc.csprojResolveAssemblyReference.cache
+C:\RND\web-link-list\WebLinkList.WebMvc\obj\Debug\netcoreapp2.0\WebLinkList.WebMvc.csproj.CoreCompileInputs.cache
+C:\RND\web-link-list\WebLinkList.WebMvc\obj\Debug\netcoreapp2.0\WebLinkList.WebMvc.AssemblyInfoInputs.cache
+C:\RND\web-link-list\WebLinkList.WebMvc\obj\Debug\netcoreapp2.0\WebLinkList.WebMvc.AssemblyInfo.cs
+C:\RND\web-link-list\WebLinkList.WebMvc\obj\Debug\netcoreapp2.0\WebLinkList.WebMvc.dll
+C:\RND\web-link-list\WebLinkList.WebMvc\obj\Debug\netcoreapp2.0\WebLinkList.WebMvc.pdb
+C:\RND\web-link-list\WebLinkList.WebMvc\bin\Debug\netcoreapp2.0\WebLinkList.Common.dll
+C:\RND\web-link-list\WebLinkList.WebMvc\bin\Debug\netcoreapp2.0\WebLinkList.Common.pdb

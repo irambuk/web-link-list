@@ -1,0 +1,4 @@
+C:\RND\web-link-list\WebLinkLink.EF>dotnet ef migrations add InitialDb -p WebLinkList.EF.csproj -s ..\WebLinkList.WebApi\WebLinkList.WebApi.csproj
+
+
+C:\RND\web-link-list\WebLinkLink.EF>dotnet ef database update -s ..\WebLinkList.WebApi\WebLinkList.WebApi.csproj
