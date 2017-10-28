@@ -13,6 +13,8 @@ namespace WebLinkList.WebMvc.Models
         public List<WebLinkViewModel> LeastRecentlyViewedLinks { get; set; }
         public List<WebLinkViewModel> WebLinks { get; set; }
         public List<CategoryViewModel> Categories { get; set; }
+
+        public string CurrentSearchString { get; set; }
     }
 
     public class WebLinkViewModel
@@ -21,7 +23,7 @@ namespace WebLinkList.WebMvc.Models
         public string Name { get; set; }
         public string Url { get; set; }
         public int CurrentCount { get; set; }
-        public DateTime? LastVisitedDateTime { get; set; }
+        public DateTime? LastVisitedDateTime { get; set; }        
 
         public List<CategoryViewModel> Categories { get; set; } = new List<CategoryViewModel>();
 

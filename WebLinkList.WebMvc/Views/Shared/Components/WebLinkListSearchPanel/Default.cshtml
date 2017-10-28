@@ -4,15 +4,25 @@
     
     <div class="panel panel-default">
         <div class="panel-body">
-            <form>
+            <form asp-controller="Home" asp-action="Index" method="post">
                 <div class="row">
                     <div class="col-md-9">
-                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="">
+                        <input type="text" class="form-control" name="searchText" placeholder="">
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3">                        
                         <button type="submit" class="btn btn-primary">Search</button>
+                        <a href="@Url.Action("Index","Home")" class="btn btn-info">Clear</a>
                     </div>
                 </div>
+                @if (ViewData["CurrentSearchString"] != null)
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+                         <span>Search by:</span>
+                         <span class="mark">@ViewData["CurrentSearchString"]</span>
+                        </div>
+                    </div>
+                }
             </form>
         </div>
     </div>

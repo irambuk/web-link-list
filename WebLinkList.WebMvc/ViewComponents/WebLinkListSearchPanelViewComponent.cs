@@ -10,9 +10,10 @@ namespace WebLinkList.WebMvc.ViewComponents
     [ViewComponent(Name = "WebLinkListSearchPanel")]
     public class WebLinkListSearchPanelViewComponent : ViewComponent
     {
-        public async Task<IViewComponentResult> InvokeAsync(string title)
+        public async Task<IViewComponentResult> InvokeAsync(string title, string currentSearchString)
         {
             ViewData["Title"] = title;
+            ViewData["CurrentSearchString"] = currentSearchString;
             return View();
         }
     }

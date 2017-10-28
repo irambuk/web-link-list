@@ -6,6 +6,6 @@ namespace WebLinkList.Common
 {
     public class ConfigSettings
     {
-        public int SpecialPanelListMaxSize { get; set; }
+        public int SummaryPanelListMaxSize { get; set; }
     }
 }
