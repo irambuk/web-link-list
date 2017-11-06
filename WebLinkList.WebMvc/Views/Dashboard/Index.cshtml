@@ -39,7 +39,7 @@
                                 labels: [@Html.Raw(String.Join(",", Model.UsageDataPerCategoryViewModels.Select(c => "'" + c.CategoryName + "'").ToList()))],
                                 datasets: [{
                                     label: '# of Visits',
-                                    data: [12, 19, 3, 5, 2, 3],
+                                    data: [@Html.Raw(String.Join(",", Model.UsageDataPerCategoryViewModels.Select(c => "'" + c.NoOfVisits + "'").ToList()))],
                                     backgroundColor: [@Html.Raw(String.Join(",", Model.UsageDataPerCategoryViewModels.Select(c => "'" + c.BackgroundColor + "'").ToList()))],
                                     borderColor: [@Html.Raw(String.Join(",", Model.UsageDataPerCategoryViewModels.Select(c => "'" + c.BoarderColor + "'").ToList()))],
                                     borderWidth: 1

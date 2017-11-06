@@ -27,6 +27,8 @@ namespace WebLinkList.EF.Migrations
 
                     b.Property<DateTime>("CreatedDateTime");
 
+                    b.Property<int>("GraphColorInt");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100);

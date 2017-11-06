@@ -14,6 +14,7 @@ namespace WebLinkList.EF.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    GraphColorInt = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
@@ -27,6 +28,7 @@ namespace WebLinkList.EF.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsFaviourite = table.Column<bool>(type: "bit", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Url = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false)
                 },

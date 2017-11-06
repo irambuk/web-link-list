@@ -32,6 +32,8 @@ namespace WebLinkList.EF
             modelBuilder.Entity<Category>().Property(t => t.Id).IsRequired();
             modelBuilder.Entity<Category>().Property(t => t.Name).IsRequired().HasMaxLength(100);
             modelBuilder.Entity<Category>().Property(t => t.CreatedDateTime).IsRequired();
+            modelBuilder.Entity<Category>().Ignore(t => t.GraphColor);
+            modelBuilder.Entity<Category>().Property(t => t.GraphColorInt).IsRequired();
 
             // Web Link Category
             modelBuilder.Entity<WebLinkCategory>().HasKey(bc => new { bc.WebLinkId, bc.CategoryId });

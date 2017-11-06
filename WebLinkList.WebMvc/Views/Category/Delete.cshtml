@@ -24,6 +24,12 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
         <dt>
+            @Html.DisplayNameFor(model => model.GraphColor)
+        </dt>
+        <dd style="background-color:rgb(@Model.GraphColor.R, @Model.GraphColor.G, @Model.GraphColor.B)">
+            @Html.DisplayFor(model => model.GraphColor)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.CreatedDateTime)
         </dt>
         <dd>

@@ -34,6 +34,7 @@ namespace WebLinkList.WebMvc.Controllers
             }
 
             var categories = _context.Categories.OrderBy(c => c.CreatedDateTime).ToList();//avoiding the group-by, revisit here
+            
 
             foreach (var category in categories)
             {
@@ -41,13 +42,13 @@ namespace WebLinkList.WebMvc.Controllers
 
                 if (type == null)
                 {
-                    count = _context.Usages.Count(u => u.WebLink.WebLinkCategories.Any(wc => wc.CategoryId == category.Id));
+                    count = _context.Usages.Where(u => u.WebLink.WebLinkCategories.Any(wc => wc.CategoryId == category.Id)).Count();
                 }
                 else
                 {
-                    count = _context.Usages.Where(u => u.CreatedDateTime > startDateTime).Count(u => u.WebLink.WebLinkCategories.Any(wc => wc.CategoryId == category.Id));
+                    count = _context.Usages.Where(u => u.CreatedDateTime > startDateTime && u.WebLink.WebLinkCategories.Any(wc => wc.CategoryId == category.Id)).Count();
                 }
-                dashboardVm.UsageDataPerCategoryViewModels.Add(new UsageDataPerCategoryViewModel { CategoryName = category.Name, NoOfVisits = count, SelectedColor = Color.PaleVioletRed});
+                dashboardVm.UsageDataPerCategoryViewModels.Add(new UsageDataPerCategoryViewModel { CategoryName = category.Name, NoOfVisits = count, SelectedColor = category.GraphColor});
             }
 
             return View(dashboardVm);

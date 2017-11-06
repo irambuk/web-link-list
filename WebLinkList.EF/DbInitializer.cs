@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using WebLinkList.EF.Model;
@@ -20,11 +21,11 @@ namespace WebLinkList.EF
                 return;   // DB has been seeded
             }
 
-            var category1 = new Category { Id = Guid.NewGuid(), Name = "Tech", CreatedDateTime = DateTime.Now };
-            var category2 = new Category { Id = Guid.NewGuid(), Name = "Life", CreatedDateTime = DateTime.Now };
-            var category3 = new Category { Id = Guid.NewGuid(), Name = "Hack", CreatedDateTime = DateTime.Now };
-            var category4 = new Category { Id = Guid.NewGuid(), Name = "News", CreatedDateTime = DateTime.Now };
-            var category5 = new Category { Id = Guid.NewGuid(), Name = "Kids", CreatedDateTime = DateTime.Now };
+            var category1 = new Category { Id = Guid.NewGuid(), Name = "Tech", CreatedDateTime = DateTime.Now, GraphColor = Color.AliceBlue };
+            var category2 = new Category { Id = Guid.NewGuid(), Name = "Life", CreatedDateTime = DateTime.Now, GraphColor = Color.LightGreen };
+            var category3 = new Category { Id = Guid.NewGuid(), Name = "Hack", CreatedDateTime = DateTime.Now, GraphColor = Color.MediumOrchid };
+            var category4 = new Category { Id = Guid.NewGuid(), Name = "News", CreatedDateTime = DateTime.Now, GraphColor = Color.GreenYellow };
+            var category5 = new Category { Id = Guid.NewGuid(), Name = "Kids", CreatedDateTime = DateTime.Now, GraphColor = Color.Goldenrod };
 
             var categories = new Category[] {
                 category1, category2, category3, category4, category5

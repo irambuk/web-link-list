@@ -11,8 +11,8 @@ using WebLinkList.EF;
 namespace WebLinkList.EF.Migrations
 {
     [DbContext(typeof(WebLinkContext))]
-    [Migration("20171026130906_NewColumn")]
-    partial class NewColumn
+    [Migration("20171106111912_InitialDb")]
+    partial class InitialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,6 +27,8 @@ namespace WebLinkList.EF.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("CreatedDateTime");
+
+                    b.Property<int>("GraphColorInt");
 
                     b.Property<string>("Name")
                         .IsRequired()
