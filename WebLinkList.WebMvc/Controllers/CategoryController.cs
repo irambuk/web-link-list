@@ -41,7 +41,7 @@ namespace WebLinkList.WebMvc.Controllers
 
         public ActionResult Create()
         {
-            var newCategory = new Category {Id = Guid.NewGuid(), CreatedDateTime = DateTime.Now };
+            var newCategory = new WebLink {Id = Guid.NewGuid(), CreatedDateTime = DateTime.Now };
             return View();
         }
 
@@ -79,7 +79,7 @@ namespace WebLinkList.WebMvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Guid id, [FromForm] Category category)
+        public ActionResult Edit(Guid id, [FromForm] WebLink category)
         {
             try
             {
@@ -108,7 +108,7 @@ namespace WebLinkList.WebMvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(Guid id, [FromForm] Category category)
+        public ActionResult Delete(Guid id, [FromForm] WebLink category)
         {
             try
             {

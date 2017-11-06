@@ -4,90 +4,28 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebLinkList.Common;
+using WebLinkList.EF;
+using Microsoft.Extensions.Options;
 
 namespace WebLinkList.WebMvc.Controllers
 {
     public class UsageController : Controller
     {
-        // GET: Usage
-        public ActionResult Index()
+        private WebLinkContext _context;
+        private ConfigSettings _configSettings;
+
+        public UsageController(WebLinkContext context, IOptions<ConfigSettings> configSettingsOptions)
         {
-            return View();
+            _context = context;
+            _configSettings = configSettingsOptions.Value;
         }
 
-        // GET: Usage/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+        public IActionResult Index()
+        {           
 
-        // GET: Usage/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Usage/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Usage/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Usage/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Usage/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Usage/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var usages = _context.Usages.OrderByDescending(wl => wl.CreatedDateTime).ToList();
+            return View(usages);
         }
     }
 }

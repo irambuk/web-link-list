@@ -35,8 +35,8 @@ namespace WebLinkList.EF
 
             // Web Link Category
             modelBuilder.Entity<WebLinkCategory>().HasKey(bc => new { bc.WebLinkId, bc.CategoryId });
-            modelBuilder.Entity<WebLinkCategory>() .HasOne(bc => bc.WebLink).WithMany(b => b.WebLinkCategories).HasForeignKey(bc => bc.WebLinkId);
-            modelBuilder.Entity<WebLinkCategory>().HasOne(bc => bc.Category).WithMany(c => c.WebLinkCategories).HasForeignKey(bc => bc.CategoryId);
+            modelBuilder.Entity<WebLinkCategory>() .HasOne(bc => bc.WebLink).WithMany((b => b.WebLinkCategories)).HasForeignKey(bc => bc.WebLinkId);
+            modelBuilder.Entity<WebLinkCategory>().HasOne(bc => bc.Category).WithMany((c => c.WebLinkCategories)).HasForeignKey(bc => bc.CategoryId);
 
             // Usage
             modelBuilder.Entity<Usage>().Property(t => t.Id).IsRequired();

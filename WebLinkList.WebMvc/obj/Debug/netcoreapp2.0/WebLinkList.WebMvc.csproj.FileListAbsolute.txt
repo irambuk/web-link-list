@@ -13,3 +13,4 @@ C:\RND\web-link-list\WebLinkList.WebMvc\obj\Debug\netcoreapp2.0\WebLinkList.WebM
 C:\RND\web-link-list\WebLinkList.WebMvc\obj\Debug\netcoreapp2.0\WebLinkList.WebMvc.pdb
 C:\RND\web-link-list\WebLinkList.WebMvc\bin\Debug\netcoreapp2.0\WebLinkList.Common.dll
 C:\RND\web-link-list\WebLinkList.WebMvc\bin\Debug\netcoreapp2.0\WebLinkList.Common.pdb
+C:\RND\web-link-list\WebLinkList.WebMvc\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs

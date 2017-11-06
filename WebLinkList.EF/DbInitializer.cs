@@ -29,7 +29,7 @@ namespace WebLinkList.EF
             var categories = new Category[] {
                 category1, category2, category3, category4, category5
             };
-            foreach (Category c in categories)
+            foreach (var c in categories)
             {
                 context.Categories.Add(c);
             }
@@ -46,7 +46,7 @@ namespace WebLinkList.EF
             {
                 weblink1, weblink2, weblink3, weblink4, weblink5
             };
-            foreach (WebLink w in weblinks)
+            foreach (var w in weblinks)
             {
                 context.WebLinks.Add(w);
             }
@@ -64,7 +64,7 @@ namespace WebLinkList.EF
             {
                 weblinkCategory1, weblinkCategory2, weblinkCategory3, weblinkCategory4, weblinkCategory5, weblinkCategory6
             };
-            foreach (WebLinkCategory w in weblinkCategories)
+            foreach (var w in weblinkCategories)
             {
                 context.WebLinkCategories.Add(w);
             }
@@ -83,7 +83,7 @@ namespace WebLinkList.EF
             {
                 usage1, usage2, usage3, usage4, usage5
             };
-            foreach (Usage u in usages)
+            foreach (var u in usages)
             {
                 context.Usages.Add(u);
             }

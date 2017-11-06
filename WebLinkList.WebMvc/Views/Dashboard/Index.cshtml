@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Dashboard</h2>
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="panel panel-default">
+            <div class="panel-heading">Usage Charts</div>
+            <div class="panel-body">
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">Manage</div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-item"><a asp-area="" asp-controller="Category" asp-action="Index">Manage Categories</a></li>
+                    <li class="list-group-item"><a asp-area="" asp-controller="WebLink" asp-action="Index">Manage Web Links</a></li>
+                    <li class="list-group-item"><a asp-area="" asp-controller="Usage" asp-action="Index">All Usage</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
