@@ -1,7 +1,14 @@
-﻿
+﻿@model  WebLinkList.WebMvc.Models.DashboardViewModel
+
 @{
     ViewData["Title"] = "Index";
 }
+
+
+
+<script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+<script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+
 
 <h2>Dashboard</h2>
 
@@ -10,7 +17,46 @@
         <div class="panel panel-default">
             <div class="panel-heading">Usage Charts</div>
             <div class="panel-body">
-                
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        @Model.SelectedUsageDropDownViewModel.Name
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        @foreach (var usageDropDownViewModel in Model.UsageDropDownViewModels)
+                        {
+                            <li><a asp-area="" asp-controller="Dashboard" asp-action="Index" asp-route-type="@usageDropDownViewModel.Type">@usageDropDownViewModel.Name</a></li>
+                        }
+                     </ul>
+                </div>
+                <canvas id="myChart" width="400" height="200"></canvas>
+                <script>
+                    $(function () { 
+                        var ctx = document.getElementById("myChart").getContext('2d');
+                        var myChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: [@Html.Raw(String.Join(",", Model.UsageDataPerCategoryViewModels.Select(c => "'" + c.CategoryName + "'").ToList()))],
+                                datasets: [{
+                                    label: '# of Visits',
+                                    data: [12, 19, 3, 5, 2, 3],
+                                    backgroundColor: [@Html.Raw(String.Join(",", Model.UsageDataPerCategoryViewModels.Select(c => "'" + c.BackgroundColor + "'").ToList()))],
+                                    borderColor: [@Html.Raw(String.Join(",", Model.UsageDataPerCategoryViewModels.Select(c => "'" + c.BoarderColor + "'").ToList()))],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    });
+                </script>
             </div>
         </div>
     </div>
@@ -29,6 +75,13 @@
     </div>
 
 </div>
+
+@section Scripts{ 
+    <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/lib/chart.js/dist/Chart.js" asp-append-version="true"></script>
+    <script src="~/lib/chart.js/dist/Chart.min.js" asp-append-version="true"></script>
+}
 
 
 

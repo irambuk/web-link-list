@@ -4,90 +4,53 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebLinkList.EF;
+using WebLinkList.Common;
+using Microsoft.Extensions.Options;
+using WebLinkList.WebMvc.Models;
+using System.Drawing;
 
 namespace WebLinkList.WebMvc.Controllers
 {
     public class DashboardController : Controller
     {
-        // GET: Dashboard
-        public ActionResult Index()
+        private WebLinkContext _context;
+        private ConfigSettings _configSettings;
+
+        public DashboardController(WebLinkContext context, IOptions<ConfigSettings> configSettingsOptions)
         {
-            return View();
+            _context = context;
+            _configSettings = configSettingsOptions.Value;
         }
 
-        // GET: Dashboard/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
-        // GET: Dashboard/Create
-        public ActionResult Create()
+        public ActionResult Index(UsageDropDownTypes? type)
         {
-            return View();
-        }
-
-        // POST: Dashboard/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
+            var dashboardVm = new DashboardViewModel();
+            var startDateTime = DateTime.MinValue;
+            if (type.HasValue) {
+                dashboardVm.SelectType(type.Value);
+                startDateTime = dashboardVm.GetCalculatedStartDate(type.Value);
             }
-            catch
+
+            var categories = _context.Categories.OrderBy(c => c.CreatedDateTime).ToList();//avoiding the group-by, revisit here
+
+            foreach (var category in categories)
             {
-                return View();
+                int count = 0;
+
+                if (type == null)
+                {
+                    count = _context.Usages.Count(u => u.WebLink.WebLinkCategories.Any(wc => wc.CategoryId == category.Id));
+                }
+                else
+                {
+                    count = _context.Usages.Where(u => u.CreatedDateTime > startDateTime).Count(u => u.WebLink.WebLinkCategories.Any(wc => wc.CategoryId == category.Id));
+                }
+                dashboardVm.UsageDataPerCategoryViewModels.Add(new UsageDataPerCategoryViewModel { CategoryName = category.Name, NoOfVisits = count, SelectedColor = Color.PaleVioletRed});
             }
-        }
 
-        // GET: Dashboard/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Dashboard/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Dashboard/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Dashboard/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return View(dashboardVm);
         }
     }
 }
