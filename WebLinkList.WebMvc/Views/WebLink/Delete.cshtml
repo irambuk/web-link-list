@@ -1,4 +1,4 @@
-﻿@model WebLinkList.EF.Model.WebLink
+﻿@model WebLinkList.WebMvc.Models.WebLinkModifyViewModel
 
 @{
     ViewData["Title"] = "Delete";
@@ -12,34 +12,48 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Id)
+            @Html.DisplayNameFor(model => model.WebLink.Id)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Id)
+            @Html.DisplayFor(model => model.WebLink.Id)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.WebLink.Name)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.WebLink.Name)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.IsFaviourite)
+            @Html.DisplayNameFor(model => model.WebLink.IsFaviourite)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.IsFaviourite)
+            @Html.DisplayFor(model => model.WebLink.IsFaviourite)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Url)
+            @Html.DisplayNameFor(model => model.WebLink.Url)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Url)
+            @Html.DisplayFor(model => model.WebLink.Url)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.CreatedDateTime)
+            @Html.DisplayNameFor(model => model.CategoryItems)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.CreatedDateTime)
+            <ul>
+                @for (int i = 0; i < Model.CategoryItems.Count; i++)
+                {
+                    <li>
+                        <input type="checkbox" value="@Model.CategoryItems[i].IsSelected" checked="@Model.CategoryItems[i].IsSelected" disabled="disabled" />
+                        <label>@Model.CategoryItems[i].Name</label>
+                    </li>
+                }
+            </ul>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.WebLink.CreatedDateTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.WebLink.CreatedDateTime)
         </dd>
     </dl>
     

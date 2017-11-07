@@ -26,7 +26,7 @@
         <dt>
             @Html.DisplayNameFor(model => model.GraphColor)
         </dt>
-        <dd style="background-color:rgb(@Model.GraphColor.R, @Model.GraphColor.G, @Model.GraphColor.B)">
+        <dd style="@Model.GraphColorStyle">
             @Html.DisplayFor(model => model.GraphColor)
         </dd>
         <dt>

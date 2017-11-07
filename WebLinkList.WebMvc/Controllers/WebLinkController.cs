@@ -34,10 +34,12 @@ namespace WebLinkList.WebMvc.Controllers
         public ActionResult Details(Guid id)
         {
             var webLink = _context.WebLinks.FirstOrDefault(c => c.Id == id);
+            var newWebLinkViewModel = new WebLinkModifyViewModel { WebLink = webLink };
+            newWebLinkViewModel.CategoryItems = _context.Categories.OrderBy(c => c.Name).Select(c => new CategoryItem { Id = c.Id, Name = c.Name, IsSelected = c.WebLinkCategories.Any(wc => wc.WebLinkId == id) }).ToList();
 
             if (webLink != null)
             {
-                return View(webLink);
+                return View(newWebLinkViewModel);
             }
             return View("Index");
         }
@@ -45,20 +47,36 @@ namespace WebLinkList.WebMvc.Controllers
         public ActionResult Create()
         {
             var newWebLink = new WebLink { Id = Guid.NewGuid(), CreatedDateTime = DateTime.Now };
-            return View();
+            var newWebLinkViewModel = new WebLinkModifyViewModel { WebLink = newWebLink };
+            newWebLinkViewModel.CategoryItems = _context.Categories.OrderBy(c => c.Name).Select(c => new CategoryItem { Id = c.Id, Name = c.Name, IsSelected = false}).ToList();
+            return View(newWebLinkViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([FromForm] WebLink webLink)
+        public ActionResult Create([FromForm] WebLinkModifyViewModel webLinkViewModel)
         {
             try
             {
+                var webLink = webLinkViewModel.WebLink;
                 webLink.Id = Guid.NewGuid();
                 webLink.CreatedDateTime = DateTime.Now;
 
                 _context.WebLinks.Add(webLink);
                 _context.SaveChanges();
+
+                //links
+                foreach (var category in webLinkViewModel.CategoryItems)
+                {
+                    if (!category.IsSelected)
+                    {
+                        continue;
+                    }
+
+                    var webLinkCategory = new WebLinkCategory { WebLinkId = webLink.Id, CategoryId = category.Id };
+                    _context.WebLinkCategories.Add(webLinkCategory);
+                    _context.SaveChanges();
+                }
 
                 return RedirectToAction(nameof(Index));
             }
@@ -71,10 +89,12 @@ namespace WebLinkList.WebMvc.Controllers
         public ActionResult Edit(Guid id)
         {
             var webLink = _context.WebLinks.FirstOrDefault(c => c.Id == id);
+            var newWebLinkViewModel = new WebLinkModifyViewModel { WebLink = webLink };
+            newWebLinkViewModel.CategoryItems = _context.Categories.OrderBy(c => c.Name).Select(c => new CategoryItem { Id = c.Id, Name = c.Name, IsSelected = c.WebLinkCategories.Any(wc => wc.WebLinkId == id) }).ToList();
 
-            if (webLink != null)
+            if (newWebLinkViewModel != null)
             {
-                return View(webLink);
+                return View(newWebLinkViewModel);
             }
             return View("Index");
 
@@ -82,15 +102,46 @@ namespace WebLinkList.WebMvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Guid id, [FromForm] WebLink webLink)
+        public ActionResult Edit(Guid id, [FromForm] WebLinkModifyViewModel webLinkViewModel)
         {
             try
             {
+                var webLink = webLinkViewModel.WebLink;
                 var originalWebLink = _context.WebLinks.FirstOrDefault(c => c.Id == id);
                 originalWebLink.Name = webLink.Name;
                 originalWebLink.IsFaviourite = webLink.IsFaviourite;
                 originalWebLink.Url = webLink.Url;
                 _context.SaveChanges();
+
+                //links
+                foreach (var category in webLinkViewModel.CategoryItems)
+                {
+                    var existingCategory = _context.WebLinkCategories.FirstOrDefault(wc => wc.WebLinkId == id && wc.CategoryId == category.Id);
+
+                    if (existingCategory != null)
+                    {
+                        if (category.IsSelected)
+                        {
+                            continue;
+                        }
+
+                        //remove
+                        _context.WebLinkCategories.Remove(existingCategory);
+                    }
+                    else
+                    {
+                        if (!category.IsSelected)
+                        {
+                            continue;
+                        }
+
+                        //add
+                        var webLinkCategory = new WebLinkCategory { WebLinkId = id, CategoryId = category.Id };
+                        _context.WebLinkCategories.Add(webLinkCategory);
+
+                    }
+                    _context.SaveChanges();
+                }
 
                 return RedirectToAction(nameof(Index));
             }
@@ -103,10 +154,13 @@ namespace WebLinkList.WebMvc.Controllers
         public ActionResult Delete(Guid id)
         {
             var webLink = _context.WebLinks.FirstOrDefault(c => c.Id == id);
+            var newWebLinkViewModel = new WebLinkModifyViewModel { WebLink = webLink };
+            newWebLinkViewModel.CategoryItems = _context.Categories.OrderBy(c => c.Name).Select(c => new CategoryItem { Id = c.Id, Name = c.Name, IsSelected = c.WebLinkCategories.Any(wc => wc.WebLinkId == id) }).ToList();
+
 
             if (webLink != null)
             {
-                return View(webLink);
+                return View(newWebLinkViewModel);
             }
             return View("Index");
         }

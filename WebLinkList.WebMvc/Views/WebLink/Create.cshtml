@@ -1,4 +1,4 @@
-﻿@model WebLinkList.EF.Model.WebLink
+﻿@model WebLinkList.WebMvc.Models.WebLinkModifyViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -13,22 +13,39 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="WebLink.Name" class="control-label"></label>
+                <input asp-for="WebLink.Name" class="form-control" />
+                <span asp-validation-for="WebLink.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <div class="checkbox">
                     <label>
-                        <input asp-for="IsFaviourite" /> @Html.DisplayNameFor(model => model.IsFaviourite)
+                        <input asp-for="WebLink.IsFaviourite" /> @Html.DisplayNameFor(model => model.WebLink.IsFaviourite)
                     </label>
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="Url" class="control-label"></label>
-                <input asp-for="Url" class="form-control" />
-                <span asp-validation-for="Url" class="text-danger"></span>
+                <label asp-for="WebLink.Url" class="control-label"></label>
+                <input asp-for="WebLink.Url" class="form-control" />
+                <span asp-validation-for="WebLink.Url" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="CategoryItems" class="control-label"></label>
+                <ul>
+                    @for (int i = 0; i < Model.CategoryItems.Count; i++)
+                    {
+                        <li>
+                            <input type="checkbox" name="@Model.CategoryItems[i].IsSelected" asp-for="@Model.CategoryItems[i].IsSelected" />
+                            <label for="@Model.CategoryItems[i].IsSelected">@Model.CategoryItems[i].Name</label>
+                            <input type="hidden" asp-for="@Model.CategoryItems[i].Id" />
+                            <input type="hidden" asp-for="@Model.CategoryItems[i].Name" />
+                        </li>
+                    }
+                    
+                </ul>
+                <span asp-validation-for="CategoryItems" class="text-danger"></span>
+            </div>
+            
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>

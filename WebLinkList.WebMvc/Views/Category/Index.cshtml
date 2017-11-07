@@ -30,7 +30,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-            <td style="background-color:rgb(@item.GraphColor.R, @item.GraphColor.G, @item.GraphColor.B)">
+            <td style="@item.GraphColorStyle">
                 @Html.DisplayFor(modelItem => item.GraphColor)
             </td>
             <td>

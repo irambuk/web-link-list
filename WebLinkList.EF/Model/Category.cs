@@ -21,6 +21,14 @@ namespace WebLinkList.EF.Model
             set { GraphColor = Color.FromArgb(value); }
         }
 
+        public string GraphColorStyle
+        {
+            get
+            {
+                return $"background-color:rgb({GraphColor.R}, {GraphColor.G}, {GraphColor.B})";
+            }
+        }
+
         public List<WebLinkCategory> WebLinkCategories { get; set; }
     }
 }
