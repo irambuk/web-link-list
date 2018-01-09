@@ -26,11 +26,13 @@ namespace WebLinkList.WebMvc.Controllers
 
         public ActionResult Index(UsageDropDownTypes? type)
         {
-            var dashboardVm = new DashboardViewModel();
+
+            var usageType = (type.HasValue) ? type.Value : UsageDropDownTypes.LastWeek;
+
+            var dashboardVm = new DashboardViewModel(usageType);
             var startDateTime = DateTime.MinValue;
             if (type.HasValue) {
-                dashboardVm.SelectType(type.Value);
-                startDateTime = dashboardVm.GetCalculatedStartDate(type.Value);
+                startDateTime = dashboardVm.SelectedUsageDropDownViewModel.GetCalculatedStartDate();
             }
 
             var categories = _context.Categories.OrderBy(c => c.CreatedDateTime).ToList();//avoiding the group-by, revisit here
@@ -48,7 +50,7 @@ namespace WebLinkList.WebMvc.Controllers
                 {
                     count = _context.Usages.Where(u => u.CreatedDateTime > startDateTime && u.WebLink.WebLinkCategories.Any(wc => wc.CategoryId == category.Id)).Count();
                 }
-                dashboardVm.UsageDataPerCategoryViewModels.Add(new UsageDataPerCategoryViewModel { CategoryName = category.Name, NoOfVisits = count, SelectedColor = category.GraphColor});
+                dashboardVm.UsageData.Add(new UsageDataPerUnitViewModel { UnitName = category.Name, NoOfVisits = count, SelectedColor = category.GraphColor});
             }
 
             return View(dashboardVm);

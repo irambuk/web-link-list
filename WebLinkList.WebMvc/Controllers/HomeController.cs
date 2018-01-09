@@ -9,6 +9,7 @@ using WebLinkList.EF;
 using WebLinkList.Common;
 using Microsoft.Extensions.Options;
 using WebLinkList.EF.Model;
+using System.Drawing;
 
 namespace WebLinkList.WebMvc.Controllers
 {
@@ -39,6 +40,7 @@ namespace WebLinkList.WebMvc.Controllers
             return View(homeVm);
         }
 
+        [HttpGet]
         public IActionResult Redirect(Guid id) {
 
             var webLink = _context.WebLinks.FirstOrDefault(wl => wl.Id == id);
@@ -56,9 +58,56 @@ namespace WebLinkList.WebMvc.Controllers
             return Redirect(webLink.Url);
         }
 
-        public IActionResult Dashboard() {
-            return View();
+        public IActionResult Category(Guid id, UsageDropDownTypes? type)
+        {
+            var category = _context.Categories.FirstOrDefault(c => c.Id == id);
+
+            if (category == null || string.IsNullOrEmpty(category.Name))
+            {
+                return View("Index");
+            }
+
+            var usageType = (type.HasValue) ? type.Value : UsageDropDownTypes.LastMonth;
+
+            var viewModel = new CategoryHomeViewModel(usageType) { Category = category};
+            viewModel.WebLinks = _context.WebLinks.Where(wl => wl.IsFaviourite)
+                .OrderByDescending(wl => wl.CreatedDateTime)
+                .Select(wl => new WebLinkViewModel
+                {
+                    WebLinkId = wl.Id,
+                    Name = wl.Name,
+                    Url = wl.Url,
+                    CurrentCount = wl.Usages.Count(),
+                    LastVisitedDateTime = (wl.Usages.Any()) ? wl.Usages.Max(u => u.CreatedDateTime) : DateTime.MinValue,
+                    Categories = wl.WebLinkCategories.Select(c => new CategoryViewModel { CategoryId = c.Category.Id, Name = c.Category.Name }).ToList()
+                })
+                .ToList();
+
+            var usages = _context.Usages.Where(u => u.WebLink.WebLinkCategories.Any(wlc => wlc.CategoryId == id)).ToList();
+            var usageData = new List<UsageDataPerUnitViewModel>();
+
+            if (usages != null && usages.Count != 0)
+            {
+                foreach (var date in viewModel.UsageTimelineDates)
+                {
+                    var usageCount = usages.Where(u => u.CreatedDateTime.Date == date.Date).Count();
+                    var usageDataPerUnitViewModel = new UsageDataPerUnitViewModel { NoOfVisits = usageCount, UnitName = date.ToShortTimeString(), SelectedColor = Color.Blue };
+                    usageData.Add(usageDataPerUnitViewModel);
+                }
+            }
+
+            viewModel.UsageData = usageData;
+
+
+
+
+
+            return View(viewModel);
         }
+
+        //public IActionResult Dashboard() {
+        //    return View();
+        //}
 
         public IActionResult Error()
         {

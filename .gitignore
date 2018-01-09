@@ -303,3 +303,8 @@ __pycache__/
 
 # OpenCover UI analysis results
 OpenCover/
+
+# Custom files/folders
+bin/
+obj/
+.vs/

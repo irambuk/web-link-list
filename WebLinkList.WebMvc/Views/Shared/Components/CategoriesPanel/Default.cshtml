@@ -10,7 +10,7 @@
         <ul class="list-group">
             @foreach (var item in Model)
             {
-                <li class="list-group-item"><a target="_blank" href="#"><span>@item.Name - </span><span class="badge">@item.CurrentCount</span></a></li>
+                <li class="list-group-item"><a target="_blank" href="@Url.Action("Category","Home", new { Id = @item.CategoryId})"><span>@item.Name - </span><span class="badge">@item.CurrentCount</span></a></li>
             }
         </ul>
 

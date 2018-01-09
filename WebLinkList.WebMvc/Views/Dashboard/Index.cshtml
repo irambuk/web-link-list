@@ -36,12 +36,12 @@
                         var myChart = new Chart(ctx, {
                             type: 'bar',
                             data: {
-                                labels: [@Html.Raw(String.Join(",", Model.UsageDataPerCategoryViewModels.Select(c => "'" + c.CategoryName + "'").ToList()))],
+                                labels: [@Html.Raw(String.Join(",", Model.UsageData.Select(c => "'" + c.UnitName + "'").ToList()))],
                                 datasets: [{
                                     label: '# of Visits',
-                                    data: [@Html.Raw(String.Join(",", Model.UsageDataPerCategoryViewModels.Select(c => "'" + c.NoOfVisits + "'").ToList()))],
-                                    backgroundColor: [@Html.Raw(String.Join(",", Model.UsageDataPerCategoryViewModels.Select(c => "'" + c.BackgroundColor + "'").ToList()))],
-                                    borderColor: [@Html.Raw(String.Join(",", Model.UsageDataPerCategoryViewModels.Select(c => "'" + c.BoarderColor + "'").ToList()))],
+                                    data: [@Html.Raw(String.Join(",", Model.UsageData.Select(c => "'" + c.NoOfVisits + "'").ToList()))],
+                                    backgroundColor: [@Html.Raw(String.Join(",", Model.UsageData.Select(c => "'" + c.BackgroundColor + "'").ToList()))],
+                                    borderColor: [@Html.Raw(String.Join(",", Model.UsageData.Select(c => "'" + c.BoarderColor + "'").ToList()))],
                                     borderWidth: 1
                                 }]
                             },
