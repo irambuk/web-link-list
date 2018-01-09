@@ -18,6 +18,7 @@ namespace WebLinkList.WebMvc
         {
             var host = BuildWebHost(args);
 
+            /*
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
@@ -31,7 +32,7 @@ namespace WebLinkList.WebMvc
                     var logger = services.GetRequiredService<ILogger<Program>>();
                     logger.LogError(ex, "An error occurred while seeding the database.");
                 }
-            }
+            }*/
 
             host.Run();
         }
