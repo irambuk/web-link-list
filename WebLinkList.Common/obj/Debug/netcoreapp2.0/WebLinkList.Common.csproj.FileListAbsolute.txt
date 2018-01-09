@@ -1,9 +1,0 @@
-C:\RND\web-link-list\WebLinkList.Common\bin\Debug\netcoreapp2.0\WebLinkList.Common.deps.json
-C:\RND\web-link-list\WebLinkList.Common\bin\Debug\netcoreapp2.0\WebLinkList.Common.dll
-C:\RND\web-link-list\WebLinkList.Common\bin\Debug\netcoreapp2.0\WebLinkList.Common.pdb
-C:\RND\web-link-list\WebLinkList.Common\obj\Debug\netcoreapp2.0\WebLinkList.Common.csproj.CoreCompileInputs.cache
-C:\RND\web-link-list\WebLinkList.Common\obj\Debug\netcoreapp2.0\WebLinkList.Common.AssemblyInfoInputs.cache
-C:\RND\web-link-list\WebLinkList.Common\obj\Debug\netcoreapp2.0\WebLinkList.Common.AssemblyInfo.cs
-C:\RND\web-link-list\WebLinkList.Common\obj\Debug\netcoreapp2.0\WebLinkList.Common.dll
-C:\RND\web-link-list\WebLinkList.Common\obj\Debug\netcoreapp2.0\WebLinkList.Common.pdb
-C:\RND\web-link-list\WebLinkList.Common\obj\Debug\netcoreapp2.0\WebLinkList.Common.csprojResolveAssemblyReference.cache
