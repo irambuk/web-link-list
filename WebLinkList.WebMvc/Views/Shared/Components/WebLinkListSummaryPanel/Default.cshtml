@@ -11,12 +11,13 @@
             {
                 <li class="list-group-item">
                     <a href="@Url.Action("Redirect","Home", new { Id = @item.WebLinkId})" target="_blank">
+                        <span style="background-color: @item.RandomColor">X</span>
                         <span>@item.Name - </span>
                         <span class="badge">@item.CurrentCount</span>                        
                     </a>
                     @foreach (var category in item.Categories)
                     {
-                        <a target="_blank" href="#"><span class="badge info">@category.Name</span></a>
+                        <a target="_blank" href="@Url.Action("Category","Home", new { Id = category.CategoryId})"><span class="badge info">@category.Name</span></a>
                     }
                     <span class="small clearfix">Last visited: @item.LastVisitedDateTimeString</span>
                 </li>

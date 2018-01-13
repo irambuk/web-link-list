@@ -70,7 +70,7 @@ namespace WebLinkList.WebMvc.Controllers
             var usageType = (type.HasValue) ? type.Value : UsageDropDownTypes.LastMonth;
 
             var viewModel = new CategoryHomeViewModel(usageType) { Category = category};
-            viewModel.WebLinks = _context.WebLinks.Where(wl => wl.IsFaviourite)
+            viewModel.WebLinks = _context.WebLinks.Where(wl => wl.WebLinkCategories.Any(c => c.CategoryId == id))
                 .OrderByDescending(wl => wl.CreatedDateTime)
                 .Select(wl => new WebLinkViewModel
                 {
@@ -84,6 +84,9 @@ namespace WebLinkList.WebMvc.Controllers
                 .ToList();
 
             var usages = _context.Usages.Where(u => u.WebLink.WebLinkCategories.Any(wlc => wlc.CategoryId == id)).ToList();
+            viewModel.Usages = usages;
+
+
             var usageData = new List<UsageDataPerUnitViewModel>();
 
             if (usages != null && usages.Count != 0)

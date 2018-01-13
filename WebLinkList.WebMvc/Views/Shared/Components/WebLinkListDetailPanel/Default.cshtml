@@ -17,7 +17,7 @@
                     </a>
                     @foreach (var category in item.Categories)
                     {
-                        <a target="_blank" href="#"><span class="badge info">@category.Name</span></a>
+                        <a target="_blank" href="@Url.Action("Category","Home", new { Id = category.CategoryId})"><span class="badge info">@category.Name</span></a>
                     }
                     <span class="small">Last visited: @item.LastVisitedDateTimeString</span>
                 </li>

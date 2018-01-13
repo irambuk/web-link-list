@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,7 +18,30 @@ namespace WebLinkList.WebMvc.Models
         public string CurrentSearchString { get; set; }
     }
 
-    public class WebLinkViewModel
+    public class BaseRandomColorViewModel
+    {
+        private string _randomColor;
+
+        public string RandomColor
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(_randomColor))
+                {
+                    return _randomColor;
+                }
+
+                var random = new Random();
+                var color = Color.FromArgb(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255));
+
+                _randomColor = $"rgba({color.R},{color.G},{color.B},1)";
+
+                return _randomColor;
+            }
+        }
+    }
+
+    public class WebLinkViewModel : BaseRandomColorViewModel
     {
         public Guid WebLinkId { get; set; }
         public string Name { get; set; }

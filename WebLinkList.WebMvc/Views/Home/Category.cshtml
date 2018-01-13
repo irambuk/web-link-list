@@ -37,16 +37,10 @@
                 $(function () {
                     var ctx = document.getElementById("myChart").getContext('2d');
                     var myChart = new Chart(ctx, {
-                        type: 'bar',
+                        type: 'line',
                         data: {
                             labels: [@Html.Raw(String.Join(",", Model.UsageTimelineNames.Select(c => "'" + c + "'").ToList()))],
-                            datasets: [{
-                                label: '# of Visits',
-                                data: [@Html.Raw(String.Join(",", Model.UsageData.Select(c => "'" + c.NoOfVisits + "'").ToList()))],
-                                backgroundColor: [@Html.Raw(String.Join(",", Model.UsageData.Select(c => "'" + c.BackgroundColor + "'").ToList()))],
-                                borderColor: [@Html.Raw(String.Join(",", Model.UsageData.Select(c => "'" + c.BoarderColor + "'").ToList()))],
-                                borderWidth: 1
-                            }]
+                            datasets: [@Html.Raw(Model.GetChart())]
                         },
                         options: {
                             scales: {
