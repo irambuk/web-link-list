@@ -108,9 +108,25 @@ namespace WebLinkList.WebMvc.Controllers
             return View(viewModel);
         }
 
-        //public IActionResult Dashboard() {
-        //    return View();
-        //}
+        public IActionResult WebLink(Guid id, UsageDropDownTypes? type)
+        {
+            var weblink = _context.WebLinks.FirstOrDefault(wl => wl.Id == id);
+            if (weblink == null)
+            {
+                return View("Index");
+            }
+
+            var usageType = (type.HasValue) ? type.Value : UsageDropDownTypes.LastMonth;
+
+            var weblinkHomeViewModel = new WebLinkHomeViewModel(usageType)
+            {
+                WebLink = weblink,
+                Usages = _context.Usages.Where(u => u.WebLinkId == id).OrderByDescending(wl => wl.CreatedDateTime).ToList()
+            };
+
+
+            return View(weblinkHomeViewModel);
+        }
 
         public IActionResult Error()
         {
@@ -166,7 +182,7 @@ namespace WebLinkList.WebMvc.Controllers
                     LastVisitedDateTime = (wl.Usages.Any()) ? wl.Usages.Max(u => u.CreatedDateTime) : DateTime.MinValue,
                     Categories = wl.WebLinkCategories.Select(c => new CategoryViewModel { CategoryId = c.Category.Id, Name = c.Category.Name }).ToList()
                 })
-                .OrderByDescending(wl => wl.CurrentCount)
+                .OrderBy(wl => wl.CurrentCount)
                 .Take(maxCount)
                 .ToList();
 

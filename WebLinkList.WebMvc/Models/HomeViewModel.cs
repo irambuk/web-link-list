@@ -31,13 +31,20 @@ namespace WebLinkList.WebMvc.Models
                     return _randomColor;
                 }
 
-                var random = new Random();
-                var color = Color.FromArgb(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255));
+                _randomColor = GetRandomColor();
 
-                _randomColor = $"rgba({color.R},{color.G},{color.B},1)";
+                return _randomColor;            }
+        }
 
-                return _randomColor;
-            }
+
+        public static string GetRandomColor()
+        {
+            var random = new Random();
+            var color = Color.FromArgb(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255));
+
+            var colorString = $"rgba({color.R},{color.G},{color.B},1)";
+
+            return colorString;
         }
     }
 

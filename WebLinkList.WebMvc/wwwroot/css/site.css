@@ -33,3 +33,8 @@
         display: none;
     }
 }
+
+/* Overrides list-group-item from Bootstrap */
+.list-group-item {
+    padding: 3px 10px
+}

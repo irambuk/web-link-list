@@ -11,6 +11,7 @@
             @foreach (var item in Model)
             {
                 <li class="list-group-item">
+                    <a href="@Url.Action("WebLink","Home", new { Id = @item.WebLinkId})" title="View history"><span class="glyphicon glyphicon-tasks" style="background-color: @item.RandomColor" aria-hidden="true"></span></a>
                     <a href="@Url.Action("Redirect","Home", new { Id = @item.WebLinkId})" target="_blank">
                         <span>@item.Name - </span>
                         <span class="badge">@item.CurrentCount</span>                        

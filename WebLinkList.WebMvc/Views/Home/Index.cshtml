@@ -8,10 +8,10 @@
 
 <div class="row">    
     <div class="col-md-4">
-        @await Component.InvokeAsync("WebLinkListSummaryPanel", new { title = "Mostly Visted Links", webLinks = Model.TopWebLinks })
+        @await Component.InvokeAsync("WebLinkListSummaryPanel", new { title = "Most Visted Links", webLinks = Model.TopWebLinks })
     </div>
     <div class="col-md-4">
-        @await Component.InvokeAsync("WebLinkListSummaryPanel", new { title = "Most Recently Visited Links", webLinks = Model.MostRecentlyViewedLinks })
+        @await Component.InvokeAsync("WebLinkListSummaryPanel", new { title = "Least Visited Links", webLinks = Model.LeastRecentlyViewedLinks })
     </div>
     <div class="col-md-4">
         @await Component.InvokeAsync("WebLinkListSummaryPanel", new { title = "Favourite Links", webLinks = Model.FaviouriteWebLinks })

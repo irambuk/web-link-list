@@ -17,7 +17,6 @@ namespace WebLinkList.WebMvc.Models
 
         public CategoryHomeViewModel(UsageDropDownTypes type) : base(type)
         {
-
         }
 
         public IList<UsageDataPerUnitViewModel> GetUsageDataPerWebLinkId(Guid weblinkId)
