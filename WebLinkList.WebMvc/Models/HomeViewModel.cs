@@ -54,7 +54,9 @@ namespace WebLinkList.WebMvc.Models
         public string Name { get; set; }
         public string Url { get; set; }
         public int CurrentCount { get; set; }
-        public DateTime? LastVisitedDateTime { get; set; }        
+        public DateTime? LastVisitedDateTime { get; set; }    
+        
+        public string ImageBase64 { get; set; }
 
         public List<CategoryViewModel> Categories { get; set; } = new List<CategoryViewModel>();
 

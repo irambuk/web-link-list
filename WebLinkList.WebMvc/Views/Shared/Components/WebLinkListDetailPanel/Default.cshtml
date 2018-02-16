@@ -11,6 +11,19 @@
             @foreach (var item in Model)
             {
                 <li class="list-group-item">
+
+                    @{
+                        var text = string.Empty;
+
+                        if (item.ImageBase64 != null)
+                        {
+                            text = item.ImageBase64;
+
+                        }
+                    }
+
+                    <img src="@String.Format("data:image/jpg;base64,{0}", text)" /> 
+
                     <a href="@Url.Action("WebLink","Home", new { Id = @item.WebLinkId})" title="View history"><span class="glyphicon glyphicon-tasks" style="background-color: @item.RandomColor" aria-hidden="true"></span></a>
                     <a href="@Url.Action("Redirect","Home", new { Id = @item.WebLinkId})" target="_blank">
                         <span>@item.Name - </span>

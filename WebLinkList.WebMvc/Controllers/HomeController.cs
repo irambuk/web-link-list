@@ -149,13 +149,25 @@ namespace WebLinkList.WebMvc.Controllers
                     Url = wl.Url,
                     CurrentCount = wl.Usages.Count(),
                     LastVisitedDateTime = (wl.Usages.Any()) ? wl.Usages.Max(u => u.CreatedDateTime) : DateTime.MinValue,
+                    ImageBase64 = wl.FaviconImageBase64,
                     Categories = wl.WebLinkCategories.Select(c => new CategoryViewModel { CategoryId = c.Category.Id, Name = c.Category.Name }).ToList()
                 })
                 .Take(maxCount)
                 .ToList();
 
             homeVm.TopWebLinks = _context.WebLinks
-                .Select(wl => new WebLinkViewModel { WebLinkId = wl.Id, Name = wl.Name, Url = wl.Url, CurrentCount = wl.Usages.Count(), LastVisitedDateTime = (wl.Usages.Any()) ? wl.Usages.Max(u => u.CreatedDateTime) : DateTime.MinValue }).OrderByDescending(wl => wl.CurrentCount).Take(maxCount).ToList();
+                .Select(wl => new WebLinkViewModel
+                {
+                    WebLinkId = wl.Id,
+                    Name = wl.Name,
+                    Url = wl.Url,
+                    CurrentCount = wl.Usages.Count(),
+                    LastVisitedDateTime = (wl.Usages.Any()) ? wl.Usages.Max(u => u.CreatedDateTime) : DateTime.MinValue,
+                    ImageBase64 = wl.FaviconImageBase64
+                })
+                    .OrderByDescending(wl => wl.CurrentCount)
+                    .Take(maxCount)
+                    .ToList();
 
             homeVm.MostRecentlyViewedLinks = _context.WebLinks
                 .Where(wl => wl.Usages.Any())
@@ -167,6 +179,7 @@ namespace WebLinkList.WebMvc.Controllers
                     Url = wl.Url,
                     CurrentCount = wl.Usages.Count(),
                     LastVisitedDateTime = (wl.Usages.Any()) ? wl.Usages.Max(u => u.CreatedDateTime) : DateTime.MinValue,
+                    ImageBase64 = wl.FaviconImageBase64,
                     Categories = wl.WebLinkCategories.Select(c => new CategoryViewModel { CategoryId = c.Category.Id, Name = c.Category.Name }).ToList()
                 })
                 .Take(maxCount)
@@ -180,6 +193,7 @@ namespace WebLinkList.WebMvc.Controllers
                     Url = wl.Url,
                     CurrentCount = wl.Usages.Count(),
                     LastVisitedDateTime = (wl.Usages.Any()) ? wl.Usages.Max(u => u.CreatedDateTime) : DateTime.MinValue,
+                    ImageBase64 = wl.FaviconImageBase64,
                     Categories = wl.WebLinkCategories.Select(c => new CategoryViewModel { CategoryId = c.Category.Id, Name = c.Category.Name }).ToList()
                 })
                 .OrderBy(wl => wl.CurrentCount)
@@ -196,6 +210,7 @@ namespace WebLinkList.WebMvc.Controllers
                     Url = wl.Url,
                     CurrentCount = wl.Usages.Count(),
                     LastVisitedDateTime = (wl.Usages.Any()) ? wl.Usages.Max(u => u.CreatedDateTime) : DateTime.MinValue,
+                    ImageBase64 = wl.FaviconImageBase64,
                     Categories = wl.WebLinkCategories.Select(c => new CategoryViewModel { CategoryId = c.Category.Id, Name = c.Category.Name }).ToList()
                 })
                 .ToList();
@@ -211,6 +226,7 @@ namespace WebLinkList.WebMvc.Controllers
                     Url = wl.Url,
                     CurrentCount = wl.Usages.Count(),
                     LastVisitedDateTime = (wl.Usages.Any()) ? wl.Usages.Max(u => u.CreatedDateTime) : DateTime.MinValue,
+                    ImageBase64 = wl.FaviconImageBase64,
                     Categories = wl.WebLinkCategories.Select(c => new CategoryViewModel { CategoryId = c.Category.Id, Name = c.Category.Name }).ToList()
                 })
                 .ToList();

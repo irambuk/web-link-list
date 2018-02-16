@@ -9,6 +9,7 @@ using WebLinkList.EF;
 using WebLinkList.Common;
 using Microsoft.Extensions.Options;
 using WebLinkList.EF.Model;
+using System.Net.Http;
 
 namespace WebLinkList.WebMvc.Controllers
 {
@@ -54,13 +55,14 @@ namespace WebLinkList.WebMvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([FromForm] WebLinkModifyViewModel webLinkViewModel)
+        public async Task<ActionResult> Create([FromForm] WebLinkModifyViewModel webLinkViewModel)
         {
             try
             {
                 var webLink = webLinkViewModel.WebLink;
                 webLink.Id = Guid.NewGuid();
                 webLink.CreatedDateTime = DateTime.Now;
+                webLink.FaviconImageBytes = await LoadFavIcon(webLink.Url);
 
                 _context.WebLinks.Add(webLink);
                 _context.SaveChanges();
@@ -102,12 +104,18 @@ namespace WebLinkList.WebMvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Guid id, [FromForm] WebLinkModifyViewModel webLinkViewModel)
+        public async Task<ActionResult> Edit(Guid id, [FromForm] WebLinkModifyViewModel webLinkViewModel)
         {
             try
             {
                 var webLink = webLinkViewModel.WebLink;
                 var originalWebLink = _context.WebLinks.FirstOrDefault(c => c.Id == id);
+
+                if (originalWebLink.Url != webLink.Url || originalWebLink.FaviconImageBase64 == string.Empty)
+                {
+                    originalWebLink.FaviconImageBytes = await LoadFavIcon(webLink.Url);
+                }
+
                 originalWebLink.Name = webLink.Name;
                 originalWebLink.IsFaviourite = webLink.IsFaviourite;
                 originalWebLink.Url = webLink.Url;
@@ -181,6 +189,15 @@ namespace WebLinkList.WebMvc.Controllers
             {
                 return View();
             }
+        }
+
+        private async Task<byte[]> LoadFavIcon(string url)
+        {
+            var httpClient = new HttpClient();
+
+            HttpResponseMessage response = await httpClient.GetAsync($"http://www.google.com/s2/favicons?domain={url}");
+            byte[] content = await response.Content.ReadAsByteArrayAsync();
+            return content;
         }
     }
 }
