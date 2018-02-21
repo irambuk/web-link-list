@@ -140,6 +140,7 @@ namespace WebLinkList.WebMvc.Controllers
             var homeVm = new HomeViewModel();
             homeVm.CurrentSearchString = searchText;
             homeVm.FaviouriteWebLinks = _context.WebLinks
+                .Where(wl => !wl.IsSingleReadLink)
                 .Where(wl => wl.IsFaviourite)
                 .OrderByDescending(wl => wl.CreatedDateTime)
                 .Select(wl => new WebLinkViewModel
@@ -156,6 +157,7 @@ namespace WebLinkList.WebMvc.Controllers
                 .ToList();
 
             homeVm.TopWebLinks = _context.WebLinks
+                .Where(wl => !wl.IsSingleReadLink)
                 .Select(wl => new WebLinkViewModel
                 {
                     WebLinkId = wl.Id,
@@ -169,9 +171,23 @@ namespace WebLinkList.WebMvc.Controllers
                     .Take(maxCount)
                     .ToList();
 
-            homeVm.MostRecentlyViewedLinks = _context.WebLinks
-                .Where(wl => wl.Usages.Any())
-                .OrderByDescending(wl => wl.Usages.Max(u => u.CreatedDateTime))
+            //homeVm.MostRecentlyViewedLinks = _context.WebLinks
+            //    .Where(wl => wl.Usages.Any())
+            //    .OrderByDescending(wl => wl.Usages.Max(u => u.CreatedDateTime))
+            //    .Select(wl => new WebLinkViewModel
+            //    {
+            //        WebLinkId = wl.Id,
+            //        Name = wl.Name,
+            //        Url = wl.Url,
+            //        CurrentCount = wl.Usages.Count(),
+            //        LastVisitedDateTime = (wl.Usages.Any()) ? wl.Usages.Max(u => u.CreatedDateTime) : DateTime.MinValue,
+            //        ImageBase64 = wl.FaviconImageBase64,
+            //        Categories = wl.WebLinkCategories.Select(c => new CategoryViewModel { CategoryId = c.Category.Id, Name = c.Category.Name }).ToList()
+            //    })
+            //    .Take(maxCount)
+            //    .ToList();
+
+            homeVm.LeastRecentlyViewedLinks = _context.WebLinks
                 .Select(wl => new WebLinkViewModel
                 {
                     WebLinkId = wl.Id,
@@ -182,10 +198,12 @@ namespace WebLinkList.WebMvc.Controllers
                     ImageBase64 = wl.FaviconImageBase64,
                     Categories = wl.WebLinkCategories.Select(c => new CategoryViewModel { CategoryId = c.Category.Id, Name = c.Category.Name }).ToList()
                 })
+                .OrderBy(wl => wl.CurrentCount)
                 .Take(maxCount)
                 .ToList();
 
-            homeVm.LeastRecentlyViewedLinks = _context.WebLinks
+            homeVm.SingleReadLinks = _context.WebLinks
+                .Where(wl => wl.IsSingleReadLink)
                 .Select(wl => new WebLinkViewModel
                 {
                     WebLinkId = wl.Id,

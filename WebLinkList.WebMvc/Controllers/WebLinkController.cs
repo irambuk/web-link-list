@@ -118,6 +118,7 @@ namespace WebLinkList.WebMvc.Controllers
 
                 originalWebLink.Name = webLink.Name;
                 originalWebLink.IsFaviourite = webLink.IsFaviourite;
+                originalWebLink.IsSingleReadLink = webLink.IsSingleReadLink;
                 originalWebLink.Url = webLink.Url;
                 _context.SaveChanges();
 

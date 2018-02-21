@@ -7,14 +7,17 @@
 }
 
 <div class="row">    
-    <div class="col-md-4">
+    <div class="col-md-3">
         @await Component.InvokeAsync("WebLinkListSummaryPanel", new { title = "Most Visted Links", webLinks = Model.TopWebLinks })
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         @await Component.InvokeAsync("WebLinkListSummaryPanel", new { title = "Least Visited Links", webLinks = Model.LeastRecentlyViewedLinks })
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         @await Component.InvokeAsync("WebLinkListSummaryPanel", new { title = "Favourite Links", webLinks = Model.FaviouriteWebLinks })
+    </div>
+    <div class="col-md-3">
+        @await Component.InvokeAsync("WebLinkListSummaryPanel", new { title = "Single Read Links", webLinks = Model.SingleReadLinks })
     </div>
 </div>
 <div class="row">

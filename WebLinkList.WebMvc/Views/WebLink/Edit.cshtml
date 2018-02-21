@@ -25,6 +25,13 @@
                 </div>
             </div>
             <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="WebLink.IsSingleReadLink" /> @Html.DisplayNameFor(model => model.WebLink.IsSingleReadLink)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
                 <label asp-for="WebLink.Url" class="control-label"></label>
                 <input asp-for="WebLink.Url" class="form-control" />
                 <span asp-validation-for="WebLink.Url" class="text-danger"></span>

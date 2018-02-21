@@ -11,9 +11,10 @@ using WebLinkList.EF;
 namespace WebLinkList.EF.Migrations
 {
     [DbContext(typeof(WebLinkContext))]
-    partial class WebLinkContextModelSnapshot : ModelSnapshot
+    [Migration("20180221111720_AddIsSingleReadUrlFlag")]
+    partial class AddIsSingleReadUrlFlag
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

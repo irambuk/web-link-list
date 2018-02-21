@@ -19,6 +19,9 @@
                     @Html.DisplayNameFor(model => model.IsFaviourite)
                 </th>
                 <th>
+                    @Html.DisplayNameFor(model => model.IsSingleReadLink)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.Url)
                 </th>
                 <th>
@@ -35,6 +38,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IsFaviourite)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsSingleReadLink)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Url)

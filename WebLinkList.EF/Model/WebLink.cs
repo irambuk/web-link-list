@@ -13,6 +13,8 @@ namespace WebLinkList.EF.Model
 
         public bool IsFaviourite { get; set; }
 
+        public bool IsSingleReadLink { get; set; }
+
         public string Url { get; set; }
 
         public byte[] FaviconImageBytes { get; set; }

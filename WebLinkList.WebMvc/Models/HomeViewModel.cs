@@ -12,6 +12,7 @@ namespace WebLinkList.WebMvc.Models
         public List<WebLinkViewModel> TopWebLinks { get; set; }
         public List<WebLinkViewModel> MostRecentlyViewedLinks { get; set; }
         public List<WebLinkViewModel> LeastRecentlyViewedLinks { get; set; }
+        public List<WebLinkViewModel> SingleReadLinks { get; set; }
         public List<WebLinkViewModel> WebLinks { get; set; }
         public List<CategoryViewModel> Categories { get; set; }
 

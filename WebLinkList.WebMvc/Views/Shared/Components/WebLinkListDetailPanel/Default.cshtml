@@ -24,17 +24,18 @@
 
                     <img src="@String.Format("data:image/jpg;base64,{0}", text)" /> 
                     -->
-                    <img src="@item.FavIconUrl" />
-                                        
+                                                           
                     <a href="@Url.Action("Redirect","Home", new { Id = @item.WebLinkId})" target="_blank">
+                        <img src="@item.FavIconUrl" />
                         <span>@item.Name - </span>
-                        <span class="badge">@item.CurrentCount</span>                        
+                                                
                     </a>
+                    <span class="badge">@item.CurrentCount</span>
                     @foreach (var category in item.Categories)
                     {
                         <a target="_blank" href="@Url.Action("Category","Home", new { Id = category.CategoryId})"><span class="badge info">@category.Name</span></a>
                     }
-                    <a href="@Url.Action("WebLink","Home", new { Id = @item.WebLinkId})" title="View history"><span class="glyphicon glyphicon-list" style="background-color: @item.RandomColor" aria-hidden="true"></span></a>
+                    <a href="@Url.Action("WebLink","Home", new { Id = @item.WebLinkId})" title="View history"><span class="glyphicon glyphicon-list" aria-hidden="true"></span></a>
                     <span class="small">Last visited: @item.LastVisitedDateTimeString</span>
                 </li>
             }
