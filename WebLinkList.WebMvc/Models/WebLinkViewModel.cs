@@ -10,7 +10,7 @@ namespace WebLinkList.WebMvc.Models
     {
         public WebLink WebLink { get; set; }
 
-        public List<CategoryItem> CategoryItems { get; set; }
+        public List<CategoryItem> CategoryItems { get; set; }        
     }
 
     public class CategoryItem

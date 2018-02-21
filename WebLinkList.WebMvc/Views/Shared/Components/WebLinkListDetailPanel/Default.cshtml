@@ -11,7 +11,7 @@
             @foreach (var item in Model)
             {
                 <li class="list-group-item">
-
+                    <!--
                     @{
                         var text = string.Empty;
 
@@ -23,8 +23,9 @@
                     }
 
                     <img src="@String.Format("data:image/jpg;base64,{0}", text)" /> 
-
-                    <a href="@Url.Action("WebLink","Home", new { Id = @item.WebLinkId})" title="View history"><span class="glyphicon glyphicon-tasks" style="background-color: @item.RandomColor" aria-hidden="true"></span></a>
+                    -->
+                    <img src="@item.FavIconUrl" />
+                                        
                     <a href="@Url.Action("Redirect","Home", new { Id = @item.WebLinkId})" target="_blank">
                         <span>@item.Name - </span>
                         <span class="badge">@item.CurrentCount</span>                        
@@ -33,6 +34,7 @@
                     {
                         <a target="_blank" href="@Url.Action("Category","Home", new { Id = category.CategoryId})"><span class="badge info">@category.Name</span></a>
                     }
+                    <a href="@Url.Action("WebLink","Home", new { Id = @item.WebLinkId})" title="View history"><span class="glyphicon glyphicon-list" style="background-color: @item.RandomColor" aria-hidden="true"></span></a>
                     <span class="small">Last visited: @item.LastVisitedDateTimeString</span>
                 </li>
             }

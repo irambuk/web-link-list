@@ -75,6 +75,17 @@ namespace WebLinkList.WebMvc.Models
                 return string.Empty;
             }
         }
+
+        public string FavIconUrl
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Url))
+                    return string.Empty;
+
+                return $"http://www.google.com/s2/favicons?domain={Url}";
+            }
+        }
     }
     public class CategoryViewModel
     {
