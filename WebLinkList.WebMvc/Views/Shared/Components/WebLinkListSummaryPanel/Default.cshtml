@@ -35,7 +35,7 @@
                         <a target="_blank" href="@Url.Action("Category","Home", new { Id = category.CategoryId})"><span class="badge info">@category.Name</span></a>
                     }
                     <a href="@Url.Action("WebLink","Home", new { Id = @item.WebLinkId})" title="View history"><span class="glyphicon glyphicon-list" aria-hidden="true"></span></a>
-                    <span class="small clearfix">Last visited: @item.LastVisitedDateTimeString</span>
+                    <span class="small clearfix">@item.LastVisitedDateTimeString</span>
                     
                 </li>
             }
